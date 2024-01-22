@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\{{ CLASS }};
+use App\Repositories\Contracts\{{ CLASS }}RepositoryInterface;
+
+class {{ CLASS }}Repository implements {{ CLASS }}RepositoryInterface
+{
+	public function query()
+	{
+		return {{ CLASS }}::query();
+	}
+
+	public function all()
+	{
+		return $this->query()->get();
+	}
+
+	public function find($id)
+	{
+		return $this->query()->findOrFail($id);
+	}
+
+	public function create(array $data)
+	{
+		return $this->query()->create($data);
+	}
+
+	public function update($id, array $data)
+	{
+		$model = $this->find($id);
+
+		return $model->update($data);
+	}
+
+	public function delete($id)
+	{
+		$model = $this->find($id);
+
+		$model->delete();
+
+		return $model;
+    }
+}
