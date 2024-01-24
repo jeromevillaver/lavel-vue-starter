@@ -3,9 +3,9 @@ Laravel 10 - vue with theme and sample component
 
 To install
 
-1. npm isntall
-2. composer install
-3. cd project
+1. cd project
+2. npm isntall
+3. composer install
 4. generate key (php artisan key:generate)
 
 This file is set for repository pattern
