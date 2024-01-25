@@ -6,7 +6,7 @@ import FlashBanner from '@/Components/Banner.vue';
 import Pagination from '@/Components/Pagination.vue';
 import moment from "moment";
 import Icon from "@/Components/Icon.vue";
-import Swal from 'sweetalert2';
+import SweetAlertDelete from '@/Components/SweetAlertDelete.vue';
 
 const props = defineProps({
     samples: Object,
@@ -19,35 +19,7 @@ watch(() => props.flash, (newFlash) => {
     flashMessages.value = { ...flashMessages.value, ...newFlash };
 });
 
-const deleteList = (id) => {
-    showConfirmation(id);
-};
-
-// Swal
-const showConfirmation = (id) => {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            router.post(route('sample.destroy', { id })) // Pass 'id' as a parameter
-            showSuccessAlert();
-        }
-    });
-};
-
-const showSuccessAlert = () => {
-    Swal.fire({
-        title: "Deleted!",
-        text: "Your file has been deleted.",
-        icon: "success"
-    });
-};
+const deleteRoute = 'sample.destroy';
 
 </script>
 
@@ -83,16 +55,14 @@ const showSuccessAlert = () => {
                                                 <td>
                                                     {{ sample.sample }}
                                                 </td>
-                                                <td class="text-end">
+                                                <td class="text-end"
+                                                    style="display: flex; gap: 8px; justify-content: flex-end;">
                                                     <button type="button" class="btn btn-primary btn-sm"
                                                         @click.prevent="router.get(route('sample.edit', { id: sample.id }), { preserveState: true })"
                                                         title="Edit">
                                                         <Icon name="pencil-white" />
                                                     </button>
-                                                    <button type="button" class="btn btn-danger btn-sm ml-1"
-                                                        @click="deleteList(sample.id)" title="Delete">
-                                                        <Icon name="trash-white" />
-                                                    </button>
+                                                    <SweetAlertDelete :id="sample.id" :route="deleteRoute" />
                                                 </td>
                                             </tr>
                                         </template>
