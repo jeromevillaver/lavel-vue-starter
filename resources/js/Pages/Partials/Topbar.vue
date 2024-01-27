@@ -49,7 +49,6 @@ const logout = () => {
                 <!-- END: Search -->
                 <!-- BEGIN: Notifications -->
                 <div class="intro-x dropdown mr-4 sm:mr-6">
-
                 </div>
                 <!-- END: Notifications -->
                 <!-- BEGIN: Account Menu -->
